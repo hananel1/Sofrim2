@@ -1,0 +1,37 @@
+<ion-app [ngStyle]="{'background-image': dailyContent ? 'url(' + dailyContent.image + ')' : 'none'}">
+  <ion-menu contentId="content" side="start" type="overlay">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>תפריט</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list class="ion-no-padding">
+        <ion-menu-toggle *ngFor="let p of pages">
+          <ion-item detail="true" [routerLink]="p.link" routerDirection="root">
+            <ion-icon slot="start" name="{{p.icon}}" color="secondary"></ion-icon>
+            <ion-label>{{p.title}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle *ngIf="plt.is('cordova') && plt.is('android')">
+          <ion-item detail="true"
+            href="https://drive.google.com/file/d/1gFuRm5CdHHMGsL0Cldblwo1b9pguC3CC/view?usp=sharing" target="_blank">
+            <ion-icon slot="start" name="notifications" color="secondary"></ion-icon>
+            <ion-label>מדריך להגדרת התראות</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="daily-quote" *ngIf="dailyContent">
+    <ion-card>
+      <ion-card-content>
+        {{dailyContent.quote}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-router-outlet id="content"></ion-router-outlet>
+</ion-app>

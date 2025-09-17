@@ -1,0 +1,33 @@
+ion-list{
+    min-height: 100%;
+    padding: 0px;
+}
+
+ion-app {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.daily-quote {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
+  z-index: 1000;
+  
+  ion-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    margin: 0;
+    
+    ion-card-content {
+      text-align: center;
+      font-size: 1.2em;
+      line-height: 1.5;
+      padding: 15px;
+    }
+  }
+}

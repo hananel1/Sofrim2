@@ -1,0 +1,24 @@
+{
+  "name": "sofrim-omer-image-generator",
+  "version": "1.0.0",
+  "description": "Generate 49 daily Omer images with quotes and Hebrew text overlays",
+  "main": "generate-omer-images.js",
+  "scripts": {
+    "generate": "node generate-omer-images.js",
+    "install-deps": "npm install canvas",
+    "setup": "npm run install-deps && node generate-omer-images.js"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "omer",
+    "hebrew",
+    "jewish",
+    "image-generation",
+    "canvas"
+  ],
+  "author": "Sofrim App",
+  "license": "MIT"
+}
