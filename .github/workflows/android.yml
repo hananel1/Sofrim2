@@ -48,10 +48,33 @@ jobs:
         
     - name: Create keystore from secrets
       run: |
+        echo "Creating keystore from GitHub secrets..."
+        if [ -z "${{ secrets.ANDROID_KEYSTORE }}" ]; then
+          echo "ERROR: ANDROID_KEYSTORE secret is empty or not set!"
+          exit 1
+        fi
         echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android-release.keystore
+        if [ ! -f "android-release.keystore" ]; then
+          echo "ERROR: Failed to create keystore file!"
+          exit 1
+        fi
+        echo "Keystore created successfully. Size: $(ls -la android-release.keystore)"
         
     - name: Create build.json
       run: |
+        echo "Creating build.json configuration..."
+        if [ -z "${{ secrets.KEYSTORE_PASSWORD }}" ]; then
+          echo "ERROR: KEYSTORE_PASSWORD secret is empty or not set!"
+          exit 1
+        fi
+        if [ -z "${{ secrets.KEY_ALIAS }}" ]; then
+          echo "ERROR: KEY_ALIAS secret is empty or not set!"
+          exit 1
+        fi
+        if [ -z "${{ secrets.KEY_PASSWORD }}" ]; then
+          echo "ERROR: KEY_PASSWORD secret is empty or not set!"
+          exit 1
+        fi
         cat > build.json << EOF
         {
           "android": {
@@ -64,6 +87,8 @@ jobs:
           }
         }
         EOF
+        echo "build.json created successfully:"
+        cat build.json
         
     - name: Build Release APK
       run: |
